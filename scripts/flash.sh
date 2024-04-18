@@ -15,4 +15,4 @@ if [ "$#" -eq 2 ]; then
     BAUD=$2
 fi
 echo Flashing to ESP32...
-esptool.py --chip esp32 --port "$SERIAL" --baud $BAUD --before default_reset --after hard_reset write_flash -e -z --flash_mode dio --flash_freq 40m --flash_size 4MB 0x0 "../firmware/console8-firmware.bin"
+esptool.py --chip esp32 --port "$SERIAL" --baud $BAUD --before default_reset --after hard_reset write_flash -e -z --flash_mode dio --flash_freq 40m --flash_size 4MB 0x0 "../firmware/merged.bin"
