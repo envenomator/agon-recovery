@@ -24,10 +24,7 @@ Depending on the Agon system, these are the options for flashing the utility to:
 5.For the Olimex AgonLight2 - please make sure the jumpers on the board are placed like this: the **LEFT** jumper is unconnected/open/placed on just one pin, the **RIGHT** jumper is connected/closed/placed on both pins
 
 ## Flashing the utility
-The utility can be flashed in several ways:
-1. By using the [web programmer](https://envenomator.github.io/) (Easy - recommended)
-2. By using one of the commandline [scripts](#flashing-using-a-script) from this repository (Fast)
-3. By using the graphical 'ESP32 Flash Download Tool' from Espressif. This option is for experienced users and requires a Windows PC. See [details](#flashing-using-the-esp-flash-download-tool) below.
+Flashing the utility is best done using the [web programmer](https://envenomator.github.io/). If your browser is incompatible, follow the [documentation](https://github.com/envenomator/envenomator.github.io) from the web programmer to flash the utility using a commandline script or graphical tool.
 
 ## Usage
 After flashing the utility to an ESP32, it presents the status of the ZDI interface and a menu if the connection is up.
@@ -57,64 +54,6 @@ Connects these cables to the ZDI port
 ### ESP32 devkit example
 ![ESP32](/media/console8_zdi.png)
 Other development boards may/will have pins placed differently, so be sure to check the layout of your particular board.
-
-## Flashing using a script
-### Windows batch file
-After changing directory to the 'scripts' folder, use the script with the following parameters:
-
-    .\flash.bat [COM_PORT] <BAUDRATE>
-
-### Unix script
-After downloading the unix shell script, it's line-endings may have been mangled by git. This can be fixed by using
-
-    sed -i -e 's/\r$//' flash.sh
-
-It is probably also necessary to make the script itself executable by setting the execute bit to the file:
-
-    chmod +x flash.sh
-
-Assuming python3 has already been installed, please (as superuser) install the esptool.py utility using
-
-    sudo pip install esptool
-
-
-After changing directory to the 'batchfile-flash' folder, use the script (as superuser) with the following parameters:
-
-    sudo ./flash.sh [SERIAL_PORT] <BAUDRATE>
-
-
-## Flashing using the ESP Flash download tool
-This option is only for experienced users, as the tool has a terrible UX design and settings are easily messed up.
-
-The latest version of this tool can be downloaded [from the Espressif support website](https://www.espressif.com/en/support/download/other-tools?keys=&field_type_tid%5B%5D=13)
-
-After installation of the Espressif ESP Flash download tool, run it and fill in the fields as follows:
-
-Select the **ESP32** platform for *Chiptype*:
-
-![espressif settings1](/media/flash-settings1.png)
-
-Leave **WorkMode** at *Develop*:
-
-![espressif settings2](/media/flash-settings2.png)
-
-Next, on the main screen, take care to specify these exact details:
-
-|    Filename           | Address |
-|:---------------------:|--------:|
-| [console8-firmware.bin](./firmware/console8-firmware.bin) |     0x0 |
-
-And **make sure** to **SELECT** the checkbox on the left, to select the file to flash.
-
-![espressif settings2](/media/flash-tool.png)
-
-- SPI speed is 40Mhz
-- SPI mode can be DIO, or QIO
-- Please don't use the CombineBin/Default buttons
-- Leave the *DoNotChgBin* option selected
-- provide your own serial port details from the **DROPDOWN** and don't type it in.
- 
-Then press 'Start', wait for the tool to finish and physically reset the board before usage.
 
 ## Internals
 Upon flashing the utility, a SPIFFS partition is prepopulated with a MOS.bin and a flash.bin. When programming MOS, both binaries are sent to the target ez80 system's memory using the ZDI interface and the flash.bin is executed remotely.
