@@ -29,6 +29,8 @@ Flashing the utility is best done using the [web programmer](https://envenomator
 ## Usage
 After flashing the utility to an ESP32, it presents the status of the ZDI interface and a menu if the connection is up.
 
+![menu](media/serialmenu.png)
+
 The menu is presented on the USB/serial interface of the ESP32 (115200 baud / 8N1). If the utility is flashed to an AgonLight system, or ESP32 with similar VGA+PS2 connections, it presents the menu on-screen as well.
 
 For AgonLight systems, having the utility flashed to the internal VDP, the best option to choose is (1) Recover MOS + VDP. 
